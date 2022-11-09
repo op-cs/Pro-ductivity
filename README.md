@@ -1,2 +1,2 @@
 # Pro-ductivity
-# Productivty app for pros
+## Written in django and in ~5 days, a productivity app for pros.
