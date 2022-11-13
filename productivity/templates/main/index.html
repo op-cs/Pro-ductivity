@@ -13,25 +13,118 @@
     </div>
     <hr>
     <div class="row m-1">
-        <div class="col card m-1 ">
+        <div class="col card m-1">
             <h1 class="text-center">To-do</h1>
-            <div class="text-center">
-                <button class="btn btn-primary mb-2">More</button>
-            </div>
+            <hr>
+            {% if tasks %}
+                {% for task in tasks %}
+                <div class="">
+                    <div class="card mb-1">
+                        <h1 class="m-2">{{ task.summary }}</h1>
+                        <p1 class="lead m-2">Deadline: </p1>
+                        <p1 class="m-2">{{ task.deadline }}</p1>
+                        <button class="btn btn-primary bg-success m-3">Complete</button>
+                    </div>
+                </div>
+                {% endfor %}
+            {% endif%}
+            <button class="btn btn-primary m-1">Add To-Do</button>
         </div>
         <div class="col card m-1">
             <h1 class="text-center">Pomodoro</h1>
-            <div class="text-center">
-                <button class="btn btn-primary mb-2">More</button>
+            <hr>
+            <div>
+                <h1 class="text-center" id="demo"></p>
             </div>
+            <hr>
+            <button id="buttonEl3" class="btn btn-primary">START</button>
+            <br>
+            <button id="buttonEl1" class="btn btn-secondary">STOP</button>
+            <!--<button class="button-18" role="button" id="buttonEl2">restart</button>-->
         </div>
         <div class="col card m-1">
             <h1 class="text-center">Timetable</h1>
-            <div class="text-center">
-                <button class="btn btn-primary mb-2">More</button>
-            </div>
+            <hr>
+            {% if tasks %}
+                {% for task in time_tasks %}
+                <div class="mb-1">
+                    <div class="card">
+                        <h1 class="m-2">{{ task.Title }}</h1>
+                        <p1 class="m-2">{{ task.Day }}</p1>
+                        <p1 class="m-2">{{ task.Time }}</p1>
+                    </div>
+                </div>
+                {% endfor %}
+            {% endif%}
+            <button class="btn btn-primary m-1">Add Timetable Entry</button>
         </div>
+        
     </div>
 </div>
+
+<script>
+
+    var seconds = 0
+    var minutes = 25
+    document.getElementById("demo").innerHTML = minutes + ":" + seconds + "0";
+    
+    var j = 1;
+    const buttonEl1 = document.querySelector('#buttonEl1')
+    //const buttonEl2 = document.querySelector('#buttonEl2')
+    const buttonEl3 = document.querySelector('#buttonEl3')
+    
+    var seconds = 59
+    var minutes = 24
+    
+    buttonEl3.addEventListener('click', () => {
+    
+    var x = setInterval(function() {
+        buttonEl1.addEventListener('click', () => {
+        clearInterval(x)
+        })
+        /*buttonEl2.addEventListener('click', () => {
+        if(j === 0){
+            var seconds = 0
+            var minutes = 25
+            document.getElementById("demo").innerHTML = minutes + ":" + seconds + "";
+            var seconds = 59
+            var minutes = 24
+            j = 1;
+        }
+        else{
+            var seconds = 0
+            var minutes = 5
+            document.getElementById("demo").innerHTML = minutes + ":" + seconds + "";
+            var seconds = 59
+            var minutes = 4
+            j = 0;
+        }
+        })*/
+    
+      // Output the result in an element with id="demo"
+      document.getElementById("demo").innerHTML = minutes + ":" + seconds + "";
+    
+      if(seconds === 0){
+          minutes -= 1;
+          seconds = 60;
+      }
+      seconds -= 1;
+        
+      // If the count down is over, write some text 
+      if (minutes === 0 && seconds === 0) {
+          if(j === 1){
+            seconds = 59;
+            minutes = 4
+            j = 0;
+          }
+          else{
+            seconds = 59;
+            minutes = 24
+            j = 1;
+          }
+      }
+    }, 1000);
+    })
+    </script>
 
 {% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="text-center jumbotron bg-primary text-light">
+    <h1 class="">To-do</h1>
+</div>
+{% if tasks %}
+    {% for task in tasks %}
+    <div class="">
+        <div class="card m-3">
+            <h1 class="m-2">{{ task.summary }}</h1>
+            <p1 class="lead m-2">Deadline: </p1>
+            <p1 class="m-2">{{ task.deadline }}</p1>
+            <button class="btn btn-primary m-3">More</button>
+        </div>
+    </div>
+
+    {% endfor %}
+{% endif%}
+
+{% endblock %}

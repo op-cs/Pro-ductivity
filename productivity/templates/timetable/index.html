@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="text-center jumbotron bg-primary text-light">
+    <h1 class="">Timetable</h1>
+</div>
+<form action="" method="POST">
+    {% csrf_token %}
+    <div class="card mr-5 ml-5">
+        <div class="m-1 mt-2">
+            <label class="lead mr-3 ml-3">Day:</label>
+            <select name="select" class="mr-3">
+                <option value="All">All</option>
+                <option value="Monday">Monday</option>
+                <option value="Tuesday">Tuesday</option>
+                <option value="Wednesday">Wednesday</option>
+                <option value="Thursday">Thursday</option>
+                <option value="Friday">Friday</option>
+                <option value="Saturday">Saturday</option>
+                <option value="Sunday">Sunday</option>
+            </select>
+            <button class="btn btn-primary">Submit</button>
+        </div>
+    </div>
+</form>
+{% if tasks %}
+    {% for task in tasks %}
+        {% if day_chosen == "All" %}
+            <div class="">
+                <div class="card m-3">
+                    <h1 class="m-2">{{ task.Title }}</h1>
+                    <p1 class="m-2">{{ task.Day }}</p1>
+                    <p1 class="m-2">{{ task.Time }}</p1>
+                    <button class="btn btn-primary m-3">More</button>
+                </div>
+            </div>
+        {% elif task.Day|stringformat:"s" == day_chosen %}
+            <div class="">
+                <div class="card m-3">
+                    <h1 class="m-2">{{ task.Title }}</h1>
+                    <p1 class="m-2">{{ task.Time }}</p1>
+                    <button class="btn btn-primary m-3">More</button>
+                </div>
+            </div>
+        {% endif %}
+    {% endfor %}
+{% endif %}
+
+{% endblock %}
